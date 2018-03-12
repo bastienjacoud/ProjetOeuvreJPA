@@ -3,7 +3,7 @@ package com.epul.oeuvres.controle;
 
 import com.epul.oeuvres.dao.AdherentService;
 import com.epul.oeuvres.meserreurs.MonException;
-import com.epul.oeuvres.metier.Adherent;
+import com.epul.oeuvres.metier.AdherentEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class AdherentControleur {
     public ModelAndView insererAdherent(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String destinationPage;
         try {
-            Adherent unAdherent = new Adherent();
+            AdherentEntity unAdherent = new AdherentEntity();
             unAdherent.setNomAdherent(request.getParameter("txtnom"));
             unAdherent.setPrenomAdherent(request.getParameter("txtprenom"));
             unAdherent.setVilleAdherent(request.getParameter("txtville"));

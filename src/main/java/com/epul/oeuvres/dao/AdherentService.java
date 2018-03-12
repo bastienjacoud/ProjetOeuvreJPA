@@ -1,50 +1,43 @@
-package com.epul.oeuvre.dao;
+package com.epul.oeuvres.dao;
 
-import com.epul.oeuvre.meserreurs.MonException;
-import java.util.*;
-
-import com.epul.oeuvre.metier.*;
-import org.hibernate.Query;
+import com.epul.oeuvres.meserreurs.MonException;
+import com.epul.oeuvres.metier.AdherentEntity;
 
 import javax.persistence.EntityTransaction;
+import java.util.List;
 
-public class Service extends com.epul.oeuvres.dao.EntityService {
+/**
+ * Created by clementserrano on 06/03/2018.
+ */
+public class AdherentService extends EntityService {
 
     /* Insertion d'un adherent
      * param Adherent unAdherent
      * */
     public void insertAdherent(AdherentEntity unAdherent) throws MonException {
-        try
-        {
+        try {
             EntityTransaction transac = startTransaction();
             transac.begin();
             entitymanager.persist(unAdherent);
             transac.commit();
             entitymanager.close();
-        }
-        catch (RuntimeException e)
-        {
+        } catch (RuntimeException e) {
             new MonException("Erreur de lecture", e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-
     /* Lister les adherents
      * */
     public List<AdherentEntity> consulterListeAdherents() throws MonException {
         List<AdherentEntity> mesAdherents = null;
-        try
-        {
+        try {
             EntityTransaction transac = startTransaction();
             transac.begin();
-            mesAdherents = (List<AdherentEntity>)entitymanager.createQuery("SELECT a FROM AdherentEntity a ORDER BY a.nomAdherent").getResultList();
+            mesAdherents = (List<AdherentEntity>) entitymanager.createQuery("SELECT a FROM AdherentEntity a ORDER BY a.nomAdherent").getResultList();
             entitymanager.close();
-        }
-        catch (RuntimeException e)
-        {
+        } catch (RuntimeException e) {
             new MonException("Erreur de lecture", e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,18 +54,14 @@ public class Service extends com.epul.oeuvres.dao.EntityService {
             EntityTransaction transac = startTransaction();
             transac.begin();
 
-            adherents = (List<AdherentEntity>)entitymanager.createQuery("SELECT a FROM AdherentEntity a WHERE a.idAndherent="+numero).getResultList();
+            adherents = (List<AdherentEntity>) entitymanager.createQuery("SELECT a FROM AdherentEntity a WHERE a.idAdherent=" + numero).getResultList();
             adherent = adherents.get(0);
             entitymanager.close();
-        }catch (RuntimeException e)
-        {
+        } catch (RuntimeException e) {
             new MonException("Erreur de lecture", e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return adherent;
     }
-
-
-
 }

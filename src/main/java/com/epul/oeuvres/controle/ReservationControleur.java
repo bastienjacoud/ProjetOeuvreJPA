@@ -4,9 +4,9 @@ import com.epul.oeuvres.dao.AdherentService;
 import com.epul.oeuvres.dao.OeuvreVenteService;
 import com.epul.oeuvres.dao.ReservationService;
 import com.epul.oeuvres.meserreurs.MonException;
-import com.epul.oeuvres.metier.Adherent;
-import com.epul.oeuvres.metier.Oeuvrevente;
-import com.epul.oeuvres.metier.Reservation;
+import com.epul.oeuvres.metier.AdherentEntity;
+import com.epul.oeuvres.metier.OeuvreventeEntity;
+import com.epul.oeuvres.metier.ReservationEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,9 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by clementserrano on 06/03/2018.
@@ -37,12 +37,12 @@ public class ReservationControleur {
             // on retourne la liste des adhérents pour le select
             request.setAttribute("mesAdherents", adherentService.consulterListeAdherents());
 
-            // on récupère l'oeuvre correspondant à l'id en paramètre
-            Oeuvrevente oeuvrevente = oeuvreVenteService.rechercherOeuvreIdParam(
+            // on récupère l'oeuvres correspondant à l'id en paramètre
+            OeuvreventeEntity oeuvrevente = oeuvreVenteService.rechercherOeuvreIdParam(
                     Integer.valueOf(request.getParameter("idOeuvre")));
 
-            // on renvoi l'oeuvre pour initialiser les champs du formulaire
-            request.setAttribute("oeuvre", oeuvrevente);
+            // on renvoi l'oeuvres pour initialiser les champs du formulaire
+            request.setAttribute("oeuvres", oeuvrevente);
         } catch (MonException e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
@@ -59,38 +59,39 @@ public class ReservationControleur {
             OeuvreVenteService oeuvreVenteService = new OeuvreVenteService();
             ReservationService reservationService = new ReservationService();
 
-            Reservation reservation = new Reservation();
+            ReservationEntity reservation = new ReservationEntity();
 
             // On récupère l'adhérent
             int idAdherent = Integer.valueOf(request.getParameter("idAdherent"));
-            Adherent adherent = adherentService.consulterAdherent(idAdherent);
+            AdherentEntity adherent = adherentService.adherentById(idAdherent);
 
-            // on récupère l'oeuvre
+            // on récupère l'oeuvres
             int idOeuvrevente = Integer.valueOf(request.getParameter("idOeuvre"));
-            Oeuvrevente oeuvrevente = oeuvreVenteService.rechercherOeuvreIdParam(idOeuvrevente);
+            OeuvreventeEntity oeuvrevente = oeuvreVenteService.rechercherOeuvreIdParam(idOeuvrevente);
 
             // On parse la date fournie
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String sDate = request.getParameter("date");
             Date date = null;
             try {
-                date = sdf.parse(sDate);
+                date = new Date(sdf.parse(sDate).getTime());
 
                 // Si le parse est OK, on réserve
-                reservation.setAdherent(adherent);
-                reservation.setDate(date);
-                reservation.setOeuvrevente(oeuvrevente);
-                reservation.setStatus("reservee");
+                reservation.setIdAdherent(adherent.getIdAdherent());
+                reservation.setDateReservation(date);
+                reservation.setIdOeuvrevente(oeuvrevente.getIdOeuvrevente());
+                reservation.setStatut("reservee");
 
                 reservationService.reserverOeuvre(reservation);
+                destinationPage = "forward:/listerOeuvre.htm";
             } catch (ParseException e) {
-                e.printStackTrace();
+                request.setAttribute("MesErreurs", e.getMessage());
+                destinationPage = "Erreur";
             }
         } catch (MonException e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
-        destinationPage = "forward:/listerOeuvre.htm";
         return new ModelAndView(destinationPage);
     }
 }

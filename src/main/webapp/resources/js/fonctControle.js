@@ -33,7 +33,7 @@ function testeOeuvre()
     else
     if(document.identification.prix.value == "")
     {
-        alert("Veuillez entrer le prix de votre oeuvre.");
+        alert("Veuillez entrer le prix de votre oeuvres.");
         ok=false;
     }
 

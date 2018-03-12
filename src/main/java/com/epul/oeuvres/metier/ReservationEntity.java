@@ -1,4 +1,4 @@
-package com.epul.oeuvre.metier;
+package com.epul.oeuvres.metier;
 
 import javax.persistence.*;
 import java.sql.Date;
