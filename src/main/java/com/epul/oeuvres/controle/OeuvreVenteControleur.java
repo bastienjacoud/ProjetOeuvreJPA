@@ -33,7 +33,6 @@ public class OeuvreVenteControleur {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
-
         return new ModelAndView(destinationPage);
     }
 
@@ -50,11 +49,11 @@ public class OeuvreVenteControleur {
             oeuvrevente.setPrixOeuvrevente(Integer.valueOf(request.getParameter("prix")));
             //oeuvrevente.setProprietaire(proprietaireService.rechercherProprietaire(Integer.valueOf(request.getParameter("idProprietaire"))));
             oeuvreVenteService.insertOeuvreVente(oeuvrevente);
+            destinationPage = "home";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
-        destinationPage = "home";
         return new ModelAndView(destinationPage);
     }
 
@@ -64,11 +63,11 @@ public class OeuvreVenteControleur {
         try {
             OeuvreVenteService oeuvreVenteService = new OeuvreVenteService();
             request.setAttribute("mesOeuvresV", oeuvreVenteService.consulterListeOeuvresV());
+            destinationPage = "listerOeuvre";
         } catch (MonException e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
-        destinationPage = "listerOeuvre";
         return new ModelAndView(destinationPage);
     }
 
@@ -83,12 +82,11 @@ public class OeuvreVenteControleur {
 
             // On récupère les caractéristiques de l'oeuvres
             request.setAttribute("oeuvres", oeuvreVenteService.rechercherOeuvreIdParam(Integer.valueOf(request.getParameter("idOeuvre"))));
+            destinationPage = "modifierOeuvre";
         } catch (MonException e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
-
-        destinationPage = "modifierOeuvre";
         return new ModelAndView(destinationPage);
     }
 
@@ -114,11 +112,11 @@ public class OeuvreVenteControleur {
             oeuvrevente.setProprietaire(propOeuvrevente);*/
 
             oeuvreVenteService.modifierOeuvre(oeuvrevente);
+            destinationPage = "home";
         } catch (MonException e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
-        destinationPage = "home";
         return new ModelAndView(destinationPage);
     }
 }

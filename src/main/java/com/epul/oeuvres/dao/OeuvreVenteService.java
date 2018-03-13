@@ -15,7 +15,7 @@ public class OeuvreVenteService extends EntityService {
         try {
             EntityTransaction transac = startTransaction();
             transac.begin();
-            uneOeuvre = (OeuvreventeEntity) entitymanager.createQuery("SELECT idOeuvrevente, titreOeuvrevente, etatOeuvrevente,prixOeuvrevente " +
+            uneOeuvre = (OeuvreventeEntity) entitymanager.createQuery("SELECT idOeuvrevente, titreOeuvrevente, etatOeuvrevente, prixOeuvrevente " +
                     "FROM OeuvreventeEntity WHERE idOeuvrevente=" + id).getSingleResult();
             entitymanager.close();
         } catch (RuntimeException e) {

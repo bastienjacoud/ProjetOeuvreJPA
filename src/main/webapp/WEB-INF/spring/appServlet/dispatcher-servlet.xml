@@ -8,7 +8,9 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     <!-- InternalPathMethodNameResolver  invokes a method with name same as the last part of request URL excluding the extension -->
 
     <bean name="/multiaction/*.htm" class="com.epul.oeuvres.controle.MultiControleur"> !->
-
+        <property name="methodNameResolver">
+            <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
+        </property>
     </bean>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
