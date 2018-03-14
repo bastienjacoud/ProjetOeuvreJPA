@@ -5,6 +5,7 @@ import com.epul.oeuvres.dao.OeuvreVenteService;
 import com.epul.oeuvres.dao.ProprietaireService;
 import com.epul.oeuvres.meserreurs.MonException;
 import com.epul.oeuvres.metier.OeuvreventeEntity;
+import com.epul.oeuvres.metier.ProprietaireEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -47,7 +48,7 @@ public class OeuvreVenteControleur {
             oeuvrevente.setTitreOeuvrevente(request.getParameter("titre"));
             oeuvrevente.setEtatOeuvrevente("L");
             oeuvrevente.setPrixOeuvrevente(Integer.valueOf(request.getParameter("prix")));
-            //oeuvrevente.setProprietaire(proprietaireService.rechercherProprietaire(Integer.valueOf(request.getParameter("idProprietaire"))));
+            oeuvrevente.setProprietaire(proprietaireService.rechercherProprietaire(Integer.valueOf(request.getParameter("idProprietaire"))));
             oeuvreVenteService.insertOeuvreVente(oeuvrevente);
             destinationPage = "home";
         } catch (Exception e) {
@@ -108,8 +109,8 @@ public class OeuvreVenteControleur {
             float prixOeuvrevente = Float.valueOf(request.getParameter("txtprix"));
             oeuvrevente.setPrixOeuvrevente(prixOeuvrevente);
 
-            /*Proprietaire propOeuvrevente = proprietaireService.rechercherProprietaire(Integer.valueOf(request.getParameter("prop")));
-            oeuvrevente.setProprietaire(propOeuvrevente);*/
+            ProprietaireEntity propOeuvrevente = proprietaireService.rechercherProprietaire(Integer.valueOf(request.getParameter("prop")));
+            oeuvrevente.setProprietaire(propOeuvrevente);
 
             oeuvreVenteService.modifierOeuvre(oeuvrevente);
             destinationPage = "home";

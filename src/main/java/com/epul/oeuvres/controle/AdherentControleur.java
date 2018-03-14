@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 // Les méthodes du contrôleur répondent à des sollicitations
 // des pages JSP
@@ -27,7 +28,8 @@ public class AdherentControleur {
         try {
             // HttpSession session = request.getSession();
             AdherentService adherentService = new AdherentService();
-            request.setAttribute("mesAdherents", adherentService.consulterListeAdherents());
+            List<AdherentEntity> mesAdherents = adherentService.consulterListeAdherents();
+            request.setAttribute("mesAdherents", mesAdherents);
             destinationPage = "listerAdherent";
         } catch (MonException e) {
             request.setAttribute("MesErreurs", e.getMessage());
