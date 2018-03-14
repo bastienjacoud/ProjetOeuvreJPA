@@ -63,6 +63,7 @@ public class OeuvreVenteService extends EntityService {
         try {
             EntityTransaction transac = startTransaction();
             transac.begin();
+            entitymanager.merge(oeuvrevente);
             transac.commit();
             entitymanager.close();
         } catch (RuntimeException e) {

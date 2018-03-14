@@ -8,29 +8,31 @@ import java.util.Objects;
 @Table(name = "reservation", schema = "baseoeuvre", catalog = "")
 @IdClass(ReservationEntityPK.class)
 public class ReservationEntity {
-    private int idOeuvrevente;
-    private int idAdherent;
+    private OeuvreventeEntity oeuvrevente;
+    private AdherentEntity adherent;
     private Date dateReservation;
     private String statut;
 
     @Id
-    @Column(name = "id_oeuvrevente")
-    public int getIdOeuvrevente() {
-        return idOeuvrevente;
+    @ManyToOne
+    @JoinColumn (name="id_oeuvrevente")
+    public OeuvreventeEntity getOeuvrevente() {
+        return oeuvrevente;
     }
 
-    public void setIdOeuvrevente(int idOeuvrevente) {
-        this.idOeuvrevente = idOeuvrevente;
+    public void setOeuvrevente(OeuvreventeEntity oeuvrevente) {
+        this.oeuvrevente = oeuvrevente;
     }
 
     @Id
-    @Column(name = "id_adherent")
-    public int getIdAdherent() {
-        return idAdherent;
+    @ManyToOne
+    @JoinColumn (name="id_adherent")
+    public AdherentEntity getAdherent() {
+        return adherent;
     }
 
-    public void setIdAdherent(int idAdherent) {
-        this.idAdherent = idAdherent;
+    public void setAdherent(AdherentEntity adherent) {
+        this.adherent = adherent;
     }
 
     @Basic
@@ -58,15 +60,14 @@ public class ReservationEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReservationEntity that = (ReservationEntity) o;
-        return idOeuvrevente == that.idOeuvrevente &&
-                idAdherent == that.idAdherent &&
+        return oeuvrevente.getIdOeuvrevente() == that.oeuvrevente.getIdOeuvrevente() &&
+                adherent.getIdAdherent() == that.adherent.getIdAdherent() &&
                 Objects.equals(dateReservation, that.dateReservation) &&
                 Objects.equals(statut, that.statut);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(idOeuvrevente, idAdherent, dateReservation, statut);
+        return Objects.hash(oeuvrevente.getIdOeuvrevente(), adherent.getIdAdherent(), dateReservation, statut);
     }
 }

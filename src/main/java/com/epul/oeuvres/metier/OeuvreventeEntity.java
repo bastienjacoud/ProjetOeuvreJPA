@@ -10,7 +10,7 @@ public class OeuvreventeEntity {
     private String titreOeuvrevente;
     private String etatOeuvrevente;
     private double prixOeuvrevente;
-    //private int idProprietaire;
+    private ProprietaireEntity proprietaire;
 
     @Id
     @Column(name = "id_oeuvrevente")
@@ -52,15 +52,15 @@ public class OeuvreventeEntity {
         this.prixOeuvrevente = prixOeuvrevente;
     }
 
-    /*@Basic
-    @Column(name = "id_proprietaire")
-    public int getIdProprietaire() {
-        return idProprietaire;
+    @ManyToOne
+    @JoinColumn (name="id_proprietaire")
+    public ProprietaireEntity getProprietaire() {
+        return proprietaire;
     }
 
-    public void setIdProprietaire(int idProprietaire) {
-        this.idProprietaire = idProprietaire;
-    }*/
+    public void setProprietaire(ProprietaireEntity proprietaire) {
+        this.proprietaire = proprietaire;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -70,12 +70,12 @@ public class OeuvreventeEntity {
         return idOeuvrevente == that.idOeuvrevente &&
                 Double.compare(that.prixOeuvrevente, prixOeuvrevente) == 0 &&
                 Objects.equals(titreOeuvrevente, that.titreOeuvrevente) &&
-                Objects.equals(etatOeuvrevente, that.etatOeuvrevente);
+                Objects.equals(etatOeuvrevente, that.etatOeuvrevente) &&
+                Objects.equals(proprietaire.getIdProprietaire(), that.proprietaire.getIdProprietaire());
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(idOeuvrevente, titreOeuvrevente, etatOeuvrevente, prixOeuvrevente);
+        return Objects.hash(idOeuvrevente, titreOeuvrevente, etatOeuvrevente, prixOeuvrevente, proprietaire.getIdProprietaire());
     }
 }

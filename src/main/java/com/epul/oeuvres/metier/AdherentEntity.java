@@ -6,6 +6,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "adherent", schema = "baseoeuvre", catalog = "")
 public class AdherentEntity {
+
     private int idAdherent;
     private String nomAdherent;
     private String prenomAdherent;

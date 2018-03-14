@@ -8,7 +8,7 @@ import java.util.Objects;
 public class OeuvrepretEntity {
     private int idOeuvrepret;
     private String titreOeuvrepret;
-    private Integer idProprietaire;
+    private ProprietaireEntity proprietaire;
 
     @Id
     @Column(name = "id_oeuvrepret")
@@ -30,14 +30,14 @@ public class OeuvrepretEntity {
         this.titreOeuvrepret = titreOeuvrepret;
     }
 
-    @Basic
-    @Column(name = "id_proprietaire")
-    public Integer getIdProprietaire() {
-        return idProprietaire;
+    @ManyToOne
+    @JoinColumn (name="id_proprietaire")
+    public ProprietaireEntity getProprietaire() {
+        return proprietaire;
     }
 
-    public void setIdProprietaire(Integer idProprietaire) {
-        this.idProprietaire = idProprietaire;
+    public void setProprietaire(ProprietaireEntity proprietaire) {
+        this.proprietaire = proprietaire;
     }
 
     @Override
@@ -47,12 +47,11 @@ public class OeuvrepretEntity {
         OeuvrepretEntity that = (OeuvrepretEntity) o;
         return idOeuvrepret == that.idOeuvrepret &&
                 Objects.equals(titreOeuvrepret, that.titreOeuvrepret) &&
-                Objects.equals(idProprietaire, that.idProprietaire);
+                Objects.equals(proprietaire.getIdProprietaire(), that.proprietaire.getIdProprietaire());
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(idOeuvrepret, titreOeuvrepret, idProprietaire);
+        return Objects.hash(idOeuvrepret, titreOeuvrepret, proprietaire.getIdProprietaire());
     }
 }

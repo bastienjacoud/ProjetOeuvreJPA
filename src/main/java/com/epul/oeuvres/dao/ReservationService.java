@@ -20,7 +20,7 @@ public class ReservationService extends EntityService {
 
             // Modifier l'état
             OeuvreVenteService oeuvreVenteService = new OeuvreVenteService();
-            OeuvreventeEntity oeuvreventeEntity = oeuvreVenteService.rechercherOeuvreIdParam(reservation.getIdOeuvrevente());
+            OeuvreventeEntity oeuvreventeEntity = reservation.getOeuvrevente();
             oeuvreventeEntity.setEtatOeuvrevente("R");
 
             transac.commit();

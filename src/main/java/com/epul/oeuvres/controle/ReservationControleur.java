@@ -77,9 +77,9 @@ public class ReservationControleur {
                 date = new Date(sdf.parse(sDate).getTime());
 
                 // Si le parse est OK, on réserve
-                reservation.setIdAdherent(adherent.getIdAdherent());
+                reservation.setAdherent(adherent);
                 reservation.setDateReservation(date);
-                reservation.setIdOeuvrevente(oeuvrevente.getIdOeuvrevente());
+                reservation.setOeuvrevente(oeuvrevente);
                 reservation.setStatut("reservee");
 
                 reservationService.reserverOeuvre(reservation);
