@@ -4,16 +4,26 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "oeuvrevente", schema = "baseoeuvre", catalog = "")
+@Table(name = "oeuvrevente", schema = "baseoeuvre")
 public class OeuvreventeEntity {
-    private int idOeuvrevente;
-    private String titreOeuvrevente;
-    private String etatOeuvrevente;
-    private double prixOeuvrevente;
-    private ProprietaireEntity proprietaire;
 
     @Id
     @Column(name = "id_oeuvrevente")
+    private int idOeuvrevente;
+
+    @Column(name = "titre_oeuvrevente")
+    private String titreOeuvrevente;
+
+    @Column(name = "etat_oeuvrevente")
+    private String etatOeuvrevente;
+
+    @Column(name = "prix_oeuvrevente")
+    private double prixOeuvrevente;
+
+    @ManyToOne
+    @JoinColumn(name = "id_proprietaire")
+    private ProprietaireEntity proprietaire;
+
     public int getIdOeuvrevente() {
         return idOeuvrevente;
     }
@@ -22,8 +32,6 @@ public class OeuvreventeEntity {
         this.idOeuvrevente = idOeuvrevente;
     }
 
-    @Basic
-    @Column(name = "titre_oeuvrevente")
     public String getTitreOeuvrevente() {
         return titreOeuvrevente;
     }
@@ -32,8 +40,6 @@ public class OeuvreventeEntity {
         this.titreOeuvrevente = titreOeuvrevente;
     }
 
-    @Basic
-    @Column(name = "etat_oeuvrevente")
     public String getEtatOeuvrevente() {
         return etatOeuvrevente;
     }
@@ -42,8 +48,6 @@ public class OeuvreventeEntity {
         this.etatOeuvrevente = etatOeuvrevente;
     }
 
-    @Basic
-    @Column(name = "prix_oeuvrevente")
     public double getPrixOeuvrevente() {
         return prixOeuvrevente;
     }
@@ -52,8 +56,6 @@ public class OeuvreventeEntity {
         this.prixOeuvrevente = prixOeuvrevente;
     }
 
-    @ManyToOne
-    @JoinColumn (name="id_proprietaire")
     public ProprietaireEntity getProprietaire() {
         return proprietaire;
     }

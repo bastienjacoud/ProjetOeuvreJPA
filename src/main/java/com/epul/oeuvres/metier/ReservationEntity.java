@@ -5,17 +5,25 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "reservation", schema = "baseoeuvre", catalog = "")
-@IdClass(ReservationEntityPK.class)
+@Table(name = "reservation", schema = "baseoeuvre")
 public class ReservationEntity {
-    private OeuvreventeEntity oeuvrevente;
-    private AdherentEntity adherent;
-    private Date dateReservation;
-    private String statut;
 
     @Id
     @ManyToOne
-    @JoinColumn (name="id_oeuvrevente")
+    @JoinColumn(name = "id_oeuvrevente")
+    private OeuvreventeEntity oeuvrevente;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "id_adherent")
+    private AdherentEntity adherent;
+
+    @Column(name = "date_reservation")
+    private Date dateReservation;
+
+    @Column(name = "statut")
+    private String statut;
+
     public OeuvreventeEntity getOeuvrevente() {
         return oeuvrevente;
     }
@@ -24,9 +32,6 @@ public class ReservationEntity {
         this.oeuvrevente = oeuvrevente;
     }
 
-    @Id
-    @ManyToOne
-    @JoinColumn (name="id_adherent")
     public AdherentEntity getAdherent() {
         return adherent;
     }
@@ -35,8 +40,6 @@ public class ReservationEntity {
         this.adherent = adherent;
     }
 
-    @Basic
-    @Column(name = "date_reservation")
     public Date getDateReservation() {
         return dateReservation;
     }
@@ -45,8 +48,6 @@ public class ReservationEntity {
         this.dateReservation = dateReservation;
     }
 
-    @Basic
-    @Column(name = "statut")
     public String getStatut() {
         return statut;
     }

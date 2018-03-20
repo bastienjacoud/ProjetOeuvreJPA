@@ -3,7 +3,6 @@ package com.epul.oeuvres.controle;
 
 import com.epul.oeuvres.dao.OeuvreVenteService;
 import com.epul.oeuvres.dao.ProprietaireService;
-import com.epul.oeuvres.meserreurs.MonException;
 import com.epul.oeuvres.metier.OeuvreventeEntity;
 import com.epul.oeuvres.metier.ProprietaireEntity;
 import org.slf4j.Logger;
@@ -65,7 +64,7 @@ public class OeuvreVenteControleur {
             OeuvreVenteService oeuvreVenteService = new OeuvreVenteService();
             request.setAttribute("mesOeuvresV", oeuvreVenteService.consulterListeOeuvresV());
             destinationPage = "listerOeuvre";
-        } catch (MonException e) {
+        } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
@@ -84,7 +83,7 @@ public class OeuvreVenteControleur {
             // On récupère les caractéristiques de l'oeuvres
             request.setAttribute("oeuvres", oeuvreVenteService.rechercherOeuvreIdParam(Integer.valueOf(request.getParameter("idOeuvre"))));
             destinationPage = "modifierOeuvre";
-        } catch (MonException e) {
+        } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
@@ -114,7 +113,7 @@ public class OeuvreVenteControleur {
 
             oeuvreVenteService.modifierOeuvre(oeuvrevente);
             destinationPage = "home";
-        } catch (MonException e) {
+        } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }

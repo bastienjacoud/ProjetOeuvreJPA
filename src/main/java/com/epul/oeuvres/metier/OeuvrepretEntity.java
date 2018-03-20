@@ -4,14 +4,20 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "oeuvrepret", schema = "baseoeuvre", catalog = "")
+@Table(name = "oeuvrepret", schema = "baseoeuvre")
 public class OeuvrepretEntity {
-    private int idOeuvrepret;
-    private String titreOeuvrepret;
-    private ProprietaireEntity proprietaire;
 
     @Id
     @Column(name = "id_oeuvrepret")
+    private int idOeuvrepret;
+
+    @Column(name = "titre_oeuvrepret")
+    private String titreOeuvrepret;
+
+    @ManyToOne
+    @JoinColumn(name = "id_proprietaire")
+    private ProprietaireEntity proprietaire;
+
     public int getIdOeuvrepret() {
         return idOeuvrepret;
     }
@@ -20,8 +26,6 @@ public class OeuvrepretEntity {
         this.idOeuvrepret = idOeuvrepret;
     }
 
-    @Basic
-    @Column(name = "titre_oeuvrepret")
     public String getTitreOeuvrepret() {
         return titreOeuvrepret;
     }
@@ -30,8 +34,6 @@ public class OeuvrepretEntity {
         this.titreOeuvrepret = titreOeuvrepret;
     }
 
-    @ManyToOne
-    @JoinColumn (name="id_proprietaire")
     public ProprietaireEntity getProprietaire() {
         return proprietaire;
     }

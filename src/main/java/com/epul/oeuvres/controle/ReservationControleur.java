@@ -3,7 +3,6 @@ package com.epul.oeuvres.controle;
 import com.epul.oeuvres.dao.AdherentService;
 import com.epul.oeuvres.dao.OeuvreVenteService;
 import com.epul.oeuvres.dao.ReservationService;
-import com.epul.oeuvres.meserreurs.MonException;
 import com.epul.oeuvres.metier.AdherentEntity;
 import com.epul.oeuvres.metier.OeuvreventeEntity;
 import com.epul.oeuvres.metier.ReservationEntity;
@@ -43,7 +42,7 @@ public class ReservationControleur {
 
             // on renvoi l'oeuvres pour initialiser les champs du formulaire
             request.setAttribute("oeuvres", oeuvrevente);
-        } catch (MonException e) {
+        } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }
@@ -88,7 +87,7 @@ public class ReservationControleur {
                 request.setAttribute("MesErreurs", e.getMessage());
                 destinationPage = "Erreur";
             }
-        } catch (MonException e) {
+        } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
         }

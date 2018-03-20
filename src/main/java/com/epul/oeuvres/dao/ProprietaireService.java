@@ -1,46 +1,25 @@
 package com.epul.oeuvres.dao;
 
-import com.epul.oeuvres.meserreurs.MonException;
 import com.epul.oeuvres.metier.ProprietaireEntity;
+import com.epul.oeuvres.repository.ProprietaireRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityTransaction;
 import java.util.List;
 
 /**
  * Created by clementserrano on 06/03/2018.
  */
-public class ProprietaireService extends EntityService {
+public class ProprietaireService {
 
-    /* Consultation des propriétaires
-    Fabrique et renvoie une liste d'objets propriétaire contenant le résultat de
-    la requête BDD */
-    public List<ProprietaireEntity> consulterListeProp() throws MonException {
-        List<ProprietaireEntity> mesProp = null;
-        try {
-            EntityTransaction transac = startTransaction();
-            transac.begin();
-            mesProp = (List<ProprietaireEntity>) entitymanager.createQuery("SELECT p FROM ProprietaireEntity p ORDER BY p.nomProprietaire").getResultList();
-            entitymanager.close();
-        } catch (RuntimeException e) {
-            new MonException("Erreur de lecture", e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return mesProp;
+    @Autowired
+    private ProprietaireRepository proprietaireRepository;
+
+    /* Consultation des propriétaires */
+    public List<ProprietaireEntity> consulterListeProp() {
+        return proprietaireRepository.findAllOrderByNomProprietaire();
     }
 
-    public ProprietaireEntity rechercherProprietaire(int id) throws MonException {
-        ProprietaireEntity unProprietaire = null;
-        try {
-            EntityTransaction transac = startTransaction();
-            transac.begin();
-            unProprietaire = (ProprietaireEntity) entitymanager.createQuery("SELECT p FROM ProprietaireEntity WHERE idProprietaire=" + id).getSingleResult();
-            entitymanager.close();
-        } catch (RuntimeException e) {
-            new MonException("Erreur de lecture", e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return unProprietaire;
+    public ProprietaireEntity rechercherProprietaire(int id) {
+        return proprietaireRepository.findByIdProprietaire(id);
     }
 }

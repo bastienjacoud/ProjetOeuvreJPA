@@ -1,19 +1,29 @@
 package com.epul.oeuvres.metier;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "adherent", schema = "baseoeuvre", catalog = "")
+@Table(name = "adherent", schema = "baseoeuvre")
 public class AdherentEntity {
-
-    private int idAdherent;
-    private String nomAdherent;
-    private String prenomAdherent;
-    private String villeAdherent;
 
     @Id
     @Column(name = "id_adherent")
+    private int idAdherent;
+
+    @Column(name = "nom_adherent")
+    private String nomAdherent;
+
+    @Column(name = "prenom_adherent")
+    private String prenomAdherent;
+
+    @Column(name = "ville_adherent")
+    private String villeAdherent;
+
+
     public int getIdAdherent() {
         return idAdherent;
     }
@@ -22,8 +32,6 @@ public class AdherentEntity {
         this.idAdherent = idAdherent;
     }
 
-    @Basic
-    @Column(name = "nom_adherent")
     public String getNomAdherent() {
         return nomAdherent;
     }
@@ -32,8 +40,6 @@ public class AdherentEntity {
         this.nomAdherent = nomAdherent;
     }
 
-    @Basic
-    @Column(name = "prenom_adherent")
     public String getPrenomAdherent() {
         return prenomAdherent;
     }
@@ -42,8 +48,6 @@ public class AdherentEntity {
         this.prenomAdherent = prenomAdherent;
     }
 
-    @Basic
-    @Column(name = "ville_adherent")
     public String getVilleAdherent() {
         return villeAdherent;
     }
@@ -65,7 +69,6 @@ public class AdherentEntity {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(idAdherent, nomAdherent, prenomAdherent, villeAdherent);
     }
 }

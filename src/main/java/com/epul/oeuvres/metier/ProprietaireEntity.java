@@ -1,17 +1,24 @@
 package com.epul.oeuvres.metier;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "proprietaire", schema = "baseoeuvre", catalog = "")
+@Table(name = "proprietaire", schema = "baseoeuvre")
 public class ProprietaireEntity {
-    private int idProprietaire;
-    private String nomProprietaire;
-    private String prenomProprietaire;
-
     @Id
     @Column(name = "id_proprietaire")
+    private int idProprietaire;
+
+    @Column(name = "nom_proprietaire")
+    private String nomProprietaire;
+
+    @Column(name = "prenom_proprietaire")
+    private String prenomProprietaire;
+
     public int getIdProprietaire() {
         return idProprietaire;
     }
@@ -20,8 +27,6 @@ public class ProprietaireEntity {
         this.idProprietaire = idProprietaire;
     }
 
-    @Basic
-    @Column(name = "nom_proprietaire")
     public String getNomProprietaire() {
         return nomProprietaire;
     }
@@ -30,8 +35,6 @@ public class ProprietaireEntity {
         this.nomProprietaire = nomProprietaire;
     }
 
-    @Basic
-    @Column(name = "prenom_proprietaire")
     public String getPrenomProprietaire() {
         return prenomProprietaire;
     }
