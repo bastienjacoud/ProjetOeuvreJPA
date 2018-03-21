@@ -3,6 +3,8 @@ package com.epul.oeuvres.dao;
 import com.epul.oeuvres.metier.ProprietaireEntity;
 import com.epul.oeuvres.repository.ProprietaireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -16,10 +18,10 @@ public class ProprietaireService {
 
     /* Consultation des propriétaires */
     public List<ProprietaireEntity> consulterListeProp() {
-        return proprietaireRepository.findAllOrderByNomProprietaire();
+        return proprietaireRepository.findAll(new Sort(Sort.Direction.ASC, "nomProprietaire"));
     }
 
     public ProprietaireEntity rechercherProprietaire(int id) {
-        return proprietaireRepository.findByIdProprietaire(id);
+        return proprietaireRepository.findOne(id);
     }
 }

@@ -18,6 +18,6 @@
 <input type="hidden" name="uneErreur" value="${MesErreurs}" id="id_erreur">
 <H1> Une erreur est survenue</H1>
 &nbsp;&nbsp;
-<p><a href="home.jsp">Retour à la page principale</a></p>
+<p><a href="home.htm">Retour à la page principale</a></p>
 </body>
 </html>

@@ -3,6 +3,9 @@ package com.epul.oeuvres.dao;
 import com.epul.oeuvres.metier.OeuvreventeEntity;
 import com.epul.oeuvres.repository.OeuvreventeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -15,12 +18,12 @@ public class OeuvreVenteService {
     private OeuvreventeRepository oeuvreventeRepository;
 
     public OeuvreventeEntity rechercherOeuvreIdParam(int id) {
-        return oeuvreventeRepository.findByIdOeuvrevente(id);
+        return oeuvreventeRepository.findOne(id);
     }
 
     /* Consultation des oeuvresVente */
     public List<OeuvreventeEntity> consulterListeOeuvresV() {
-        return oeuvreventeRepository.findAllOrderByTitreOeuvrevente();
+        return oeuvreventeRepository.findAll(new Sort(Sort.Direction.ASC, "titreOeuvrevente"));
     }
 
     public void insertOeuvreVente(OeuvreventeEntity oeuvrevente) {

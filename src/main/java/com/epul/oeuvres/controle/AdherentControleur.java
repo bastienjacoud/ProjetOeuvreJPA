@@ -34,6 +34,8 @@ public class AdherentControleur {
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
+            e.printStackTrace();
+            logger.error(e.getStackTrace().toString());
         }
         return new ModelAndView(destinationPage);
     }

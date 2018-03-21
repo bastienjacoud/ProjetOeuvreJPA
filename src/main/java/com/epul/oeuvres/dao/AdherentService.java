@@ -24,12 +24,12 @@ public class AdherentService {
     /* Lister les adherents
      * */
     public List<AdherentEntity> consulterListeAdherents() {
-        return adherentRepository.findAll(null).getContent();
+        return adherentRepository.findAll();
     }
 
     /* Consultation d'une adherent par son numéro
      */
     public AdherentEntity adherentById(int numero) {
-        return adherentRepository.findByIdAdherent(numero);
+        return adherentRepository.findOne(numero);
     }
 }
